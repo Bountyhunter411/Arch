@@ -14,30 +14,18 @@
 }
 
 
-
-# Install the BlackArch mirror
-
-#{
-#	curl -O https://blackarch.org/strap.sh
-#
-#	echo 8bfe5a569ba7d3b055077a4e5ceada94119cccef strap.sh | sha1sim -c
-#
-#	chmod +x strap.sh
-#
-#	./strap.sh
-#
-#	pacman -Sy
-#
-#}
-
 {
 
-	if (cat /etc/pacman.conf | grep blackarch >/dev/null && echo "BlackArch Repo Exists")
-	elif ( curl -O https://blackarch.org/strap.sh
+	if (cat /etc/pacman.conf | grep blackarch >/dev/null)
+	then (echo "BlackArch Repo Exists")
+	else (echo "Adding BlackArch Repo")
+	       	curl -O https://blackarch.org/strap.sh
 		echo 8bfe5a569ba7d3b055077a4e5ceada94119cccef strap.sh | sha1sum -c
 		chmod +x strap.sh && ./strap.sh
-		pacman -Syu )
+		pacman -Syu 
 	if (cat /etc/pacman.conf | grep blackarch >/dev/null && echo "BlackArch Repo Configured")
-
-
+	fi
+	
 }
+
+
