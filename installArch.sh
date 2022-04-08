@@ -11,6 +11,7 @@
 	for program in "${programs[@]}"; do
 		if ! command -v "$program" > /dev/null 2>&1; then
 			pacman -Sy "$program" --noconfirm
+		fi
 	done
 }
 # Check connection and update mirrorlist
