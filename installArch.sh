@@ -23,6 +23,7 @@
 		echo 8bfe5a569ba7d3b055077a4e5ceada94119cccef strap.sh | sha1sum -c
 		chmod +x strap.sh && ./strap.sh
 		pacman -Syu 
+	fi
 	if (cat /etc/pacman.conf | grep blackarch >/dev/null && echo "BlackArch Repo Configured")
 	fi
 	
