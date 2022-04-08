@@ -25,7 +25,6 @@
 		pacman -Syu 
 	fi
 	if (cat /etc/pacman.conf | grep blackarch >/dev/null && echo "BlackArch Repo Configured")
-	fi
 	
 }
 
