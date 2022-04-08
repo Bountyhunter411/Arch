@@ -18,8 +18,8 @@
 {
 
 	if (cat /etc/pacman.conf | grep blackarch >/dev/null)
-	then (echo "BlackArch Repo Exists") sleep 2
-	else (echo "Adding BlackArch Repo") sleep 2
+	then (echo "BlackArch Repo Exists" sleep 2)
+	else (echo "Adding BlackArch Repo" sleep 2)
 	       	curl -O https://blackarch.org/strap.sh
 		echo 8bfe5a569ba7d3b055077a4e5ceada94119cccef strap.sh | sha1sum -c
 		chmod +x strap.sh && ./strap.sh
