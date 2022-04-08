@@ -1,17 +1,27 @@
 #!/bin/sh
 
+
+# Install dependencies
+
+{
+
+	pacman -Sy
+	programs=(reflector)
+
+	for program in "${programs[@]}"; do
+		if ! command -v "$program" > /dev/null 2>&1; then
+			pacman -Sy "$program" --noconfirm
+	done
+}
 # Check connection and update mirrorlist
 
 {
 	ping -c3 archlinux.org >/dev/null && echo "Network Connected"
-	
 	sleep 3
-
-	if (which reflector >/dev/null && echo "Updating Mirrorlist")
-	else (pacman -Sy reflector --noconfirm --needed)
-	then (reflector --sort rate --country "Australia, New Zealand" --save /home/daniel/git/repos/Arch/mirrorlist.conf)
+	echo "Updating Mirrorlist"
+	reflector --sort rate --country "Australia, New Zealand" --save /home/daniel/git/repos/Arch/mirrorlist.conf
 		echo "Mirrorlist Updated"
-	fi
+
 }
 
 # Add BlackArch repo
@@ -32,5 +42,3 @@
 	fi
 
 }
-
-
