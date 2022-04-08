@@ -23,12 +23,8 @@
 	       	curl -O https://blackarch.org/strap.sh
 		echo 8bfe5a569ba7d3b055077a4e5ceada94119cccef strap.sh | sha1sum -c
 		chmod +x strap.sh && ./strap.sh
-		pacman -Syu -y
+		pacman -Syu --noconfirm --needed
 	fi
-
-}
-
-{
 
 	if (cat /etc/pacman.conf | grep blackarch >/dev/null)
 	then (echo "BlackArch Repo Configured")
