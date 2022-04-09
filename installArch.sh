@@ -116,7 +116,7 @@
 	if (git clone https://github.com/Bountyhunter411/dotfiles)
 	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc)
 			echo "Installing zsh theme"
-				sudo -u "$name" yay -Si "$p10k" --noconfirm
+				sudo -u "$name" yay -S "$p10k" --noconfirm
 					echo "zsh theme installed"
 						echo "Installing zsh plugins"
 							git clone https://github.com/zsh-users/zsh-syntax-highlighting
