@@ -109,25 +109,26 @@
 	fi
 }
 
-# Download and copy dotfiles
+# Download and copy dotfiles (comment out; need to fix; doesn't work)
 
-{
+#{
+#
+#	if (git clone https://github.com/Bountyhunter411/dotfiles)
+#	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc)
+#			echo "Installing zsh theme"
+#				sudo -u "$name" yay -S "$p10k" --noconfirm
+#					cp -r dotfiles/zsh/themes/zsh-theme-powerlevel10k /usr/share/
+#						echo "zsh theme installed"
+#							echo "Installing zsh plugins"
+#								git clone https://github.com/zsh-users/zsh-syntax-highlighting
+#								mv zsh-syntax-highlighting /usr/share/zsh/plugins/zsh-syntax-highlighting/
+#									git clone https://github.com/zsh-users/zsh-autosuggestions
+#									mv zsh-autosuggestions /usr/share/zsh/plugins/zsh-autosuggestions/
+#										echo "Plugins installed"
+#	else (echo "Unable to clone dotfiles repo")
+#	fi
 
-	if (git clone https://github.com/Bountyhunter411/dotfiles)
-	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc)
-			echo "Installing zsh theme"
-				sudo -u "$name" yay -S "$p10k" --noconfirm
-					echo "zsh theme installed"
-						echo "Installing zsh plugins"
-							git clone https://github.com/zsh-users/zsh-syntax-highlighting
-							mv zsh-syntax-highlighting /usr/share/zsh/plugins/zsh-syntax-highlighting/
-								git clone https://github.com/zsh-users/zsh-autosuggestions
-								mv zsh-autosuggestions /usr/share/zsh/plugins/zsh-autosuggestions/
-									echo "Plugins installed"
-	else (echo "Unable to clone dotfiles repo")
-	fi
-
-}
+#}
 
 # Enable Services and reboot
 
