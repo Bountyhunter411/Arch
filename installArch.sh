@@ -6,7 +6,7 @@
 
 	aurprograms=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrgb-git spotify steam-fonts via-bin xenia-bin)
 
-	p10k=(zsh-theme-powerlevel10k-git)
+	zshthemes=(zsh-theme-powerlevel10k-git)
 
 	#applications=(zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
 
@@ -110,6 +110,49 @@
 }
 
 # Download and copy dotfiles (comment out; need to fix; doesn't work)
+
+# Download and install zsh theme
+
+{
+
+	for zshtheme in "{$zshthemes[@]}"; do
+		if ! command -v "$zshtheme" > /dev/null 2>&1; then
+			echo "Installing zsh Theme"
+				sudo -u "$name" yay -S "$zshtheme" --noconfirm
+				echo "Theme Installed"
+		fi
+	done
+
+}
+
+# Add zsh plugins
+
+{
+
+	if (git clone https://github.com/zsh-users/zsh-syntax-highlighting)
+	then (mkdir -p /usr/share/zsh/plugins/zsh-syntax-highlighting/ && cp -r zsh-syntax-highlighting/* /usr/share/zsh/plugins/zsh-syntax-highlighting/ && echo "Syntax Highlighting Installed")
+
+	sleep 3
+
+	if (git clone https://github.com/zsh-users/zsh-autosuggestions)
+	then (mkdir -p /usr/share/zsh/plugins/zsh/autosuggestions && cp -r zsh-autosuggestions/* /usr/share/zsh/plugins/zsh-autosuggestions && echo "Autosuggentions Installed")
+
+}
+
+# Copy dotfiles
+
+{
+
+	if (git clone https://github.com/Bountyhunter411/dotfiles)
+	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc && rm -rf /usr/share/zsh-theme/powerlevel10k/* && cp -r dotfiles/zsh/themes/zsh-theme-powerlevel10k/* /usr/share/zsh-theme/powerlevel10k/)
+	else ( echo "Dotfile install failed")
+	fi
+
+}
+
+
+
+
 
 #{
 #
