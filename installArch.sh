@@ -4,7 +4,7 @@
 
 	programs=(reflector)
 
-	applications=(zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
+	#applications=(zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
 
 {
 
@@ -58,10 +58,16 @@
 
 {
 
-for application in "${applications[@]}"; do
-	if ! command -v "$application" > /dev/null 2>&1; then
-		pacman -Sy "$application" --noconfirm --needed
-	fi
-done
+if 	(pacman -Sy zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
+then (echo "Applications Installed")
+else (echo "Application Install Failed")
+
+
+
+#for application in "${applications[@]}"; do
+#	if ! command -v "$application" > /dev/null 2>&1; then
+#		pacman -Sy "$application" --noconfirm --needed
+#	fi
+#done
 
 }
