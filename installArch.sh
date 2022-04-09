@@ -2,7 +2,7 @@
 
 # Functions
 
-	mirrorprograms=(reflector)
+	dependentprograms=(reflector dialog)
 
 	aurprograms=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrdb-git spotify steam-fonts via-bin xenia-bin)
 
@@ -39,12 +39,13 @@
 	sleep 3
 		pacman -Sy
 
-	for mirrorprogram in "${mirrorprograms[@]}"; do
-		if ! command -v "$mirrorprogram" > /dev/null 2>&1; then
-			pacman -Sy "$mirrorprogram" --noconfirm
+	for dependentprogram in "${dependentprograms[@]}"; do
+		if ! command -v "$dependentprogram" > /dev/null 2>&1; then
+			pacman -Sy "$dependentprogram" --noconfirm
 		fi
 	done
 
+	echo "Installed Dialog and Reflector"
 	echo "Updating Mirrorlist"
 	reflector --sort rate --country "Australia, New Zealand" --save /home/daniel/git/repos/Arch/mirrorlist.conf
 		echo "Mirrorlist Updated"
