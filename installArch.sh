@@ -75,7 +75,7 @@
 
 {
 
-	if 	(pacman -Sy zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
+	if 	(pacman -Sy zsh plasma konsole dolphin kate yay virt-manager qemu libvirt edk2-ovmf ebtables dnsmasq bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
 	then (echo "Applications Installed")
 	else (echo "Application Install Failed")
 	fi
@@ -134,8 +134,16 @@
 
 {
 
+	echo "Enabling Services"
+	sleep 3
 	systemctl enable NetworkManager
+	systemctl enable libvirtd
+	systemctl enable virtlogd.socket
 	systemctl enable sddm
+
+	echo "REBOOTING IN 5 SECOUNDS!"
+
+	sleep 7
 
 	reboot
 
