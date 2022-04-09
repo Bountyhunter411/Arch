@@ -4,9 +4,9 @@
 
 	programs=(reflector)
 
-	applications="zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl"
+	#applications="zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl"
 
-	aur="brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrdb-git spotify steam-fonts via-bin xenia-bin"
+	#aur="brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrdb-git spotify steam-fonts via-bin xenia-bin"
 
 # Install dependencies
 
@@ -56,7 +56,7 @@
 {
 
 	echo "Installing Applications" sleep 3
-	if (pacman -Sy "$applications" --noconfirm --needed)
+	if (pacman -Sy sh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl --noconfirm --needed)
 	then (echo "Applications Installed")
 	else (echo "Application Install Failed" sleep 3)
 	fi
@@ -68,7 +68,7 @@
 {
 
 	echo "Installing AUR Applications" sleep 3
-	if (yay -si -a --noconfirm "$aur")
+	if (yay -si -a brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrdb-git spotify steam-fonts via-bin xenia-bin --noconfirm)
 	then (echo "AUR Applications Installed" sleep 3)
 	else ( echo "AUR Applications Install Failed" sleep 3)
 	fi
