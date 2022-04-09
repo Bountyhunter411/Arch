@@ -8,7 +8,8 @@ programs=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd
 
 for program in "${programs[@]}"; do
 	if ! command -v "$program" > /dev/null 2>&1; then
-		yay -Sia "$program" --noconfirm
+		echo "Installing $program"
+			sudo -u "$name" yay -Si "$program" --noconfirm
 	fi
 done
 
