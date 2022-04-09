@@ -4,7 +4,7 @@
 
 	dependentprograms=(reflector dialog)
 
-	aurprograms=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrdb-git spotify steam-fonts via-bin xenia-bin)
+	aurprograms=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrgb-git spotify steam-fonts via-bin xenia-bin)
 
 	p10k=(zsh-theme-powerlevel10k-git)
 
