@@ -2,15 +2,23 @@
 
 # Functions
 
-	name=$USER
+	mirrorprograms=(reflector)
 
-	mirrorUpdater=(reflector)
-
-	aur=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrdb-git spotify steam-fonts via-bin xenia-bin)
+	aurprograms=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrdb-git spotify steam-fonts via-bin xenia-bin)
 
 	p10k=(zsh-theme-powerlevel10k-git)
 
 	#applications=(zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
+
+# Get user input for username
+
+	getusername() {
+		name=$(\
+				dialog --title "Please Enter Username" \
+				--inputbox "Enter Username" 8 40 \
+				3>&1 1>&2 2>&3- \
+				)
+				}
 
 {
 
@@ -31,9 +39,9 @@
 	sleep 3
 		pacman -Sy
 
-	for mirror in "${mirrorUpdate[@]}"; do
-		if ! command -v "$mirrorUpdater" > /dev/null 2>&1; then
-			pacman -Sy "$mirrorUpdater" --noconfirm
+	for program in "${mirrorprograms[@]}"; do
+		if ! command -v "$mirrorprograms" > /dev/null 2>&1; then
+			pacman -Sy "$mirrorprograms" --noconfirm
 		fi
 	done
 
@@ -77,10 +85,12 @@
 
 {
 
-	for program in "${aur[@]}"; do
-		if ! command -v "$aur" > /dev/null 2>&1; then
-			echo "Installing $aur"
-				sudo -u "$name" yay -Si "$aur" --noconfirm
+	getusername
+
+	for program in "${aurprograms[@]}"; do
+		if ! command -v "$aurprograms" > /dev/null 2>&1; then
+			echo "Installing $aurprograms"
+				sudo -u "$name" yay -Si "$aurprograms" --noconfirm
 		fi
 	done
 
