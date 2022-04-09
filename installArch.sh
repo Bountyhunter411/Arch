@@ -39,9 +39,9 @@
 	sleep 3
 		pacman -Sy
 
-	for program in "${mirrorprograms[@]}"; do
-		if ! command -v "$mirrorprograms" > /dev/null 2>&1; then
-			pacman -Sy "$mirrorprograms" --noconfirm
+	for mirrorprogram in "${mirrorprograms[@]}"; do
+		if ! command -v "$mirrorprogram" > /dev/null 2>&1; then
+			pacman -Sy "$mirrorprogram" --noconfirm
 		fi
 	done
 
@@ -87,10 +87,10 @@
 
 	getusername
 
-	for program in "${aurprograms[@]}"; do
-		if ! command -v "$aurprograms" > /dev/null 2>&1; then
-			echo "Installing $aurprograms"
-				sudo -u "$name" yay -Si "$aurprograms" --noconfirm
+	for aurprogram in "${aurprograms[@]}"; do
+		if ! command -v "$aurprogram" > /dev/null 2>&1; then
+			echo "Installing $aurprogram"
+				sudo -u "$name" yay -S "$aurprogram" --noconfirm
 		fi
 	done
 
@@ -105,7 +105,7 @@
 	if (sudo -u "$name" chsh -s /bin/zsh && echo $SHELL == /bin/zsh)
 	then (echo "Shell is now zsh")
 	else (echo "Shell switch failed!")
-
+	fi
 }
 
 # Download and copy dotfiles
