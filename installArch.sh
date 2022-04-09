@@ -119,8 +119,10 @@
 				sudo -u "$name" yay -Si "$p10k" --noconfirm
 					echo "zsh theme installed"
 						echo "Installing zsh plugins"
-							git clone https://github.com/zsh-users/zsh-syntax-highlighting  /usr/share/zsh/plugins/zsh-autosuggestions/
-								git clone https://github.com/zsh-users/zsh-autosuggestions /usr/share/zsh/plugins/zsh-autosuggestions/
+							git clone https://github.com/zsh-users/zsh-syntax-highlighting
+							mv zsh-syntax-highlighting /usr/share/zsh/plugins/zsh-syntax-highlighting/
+								git clone https://github.com/zsh-users/zsh-autosuggestions
+								mv zsh-autosuggestions /usr/share/zsh/plugins/zsh-autosuggestions/
 									echo "Plugins installed"
 	else (echo "Unable to clone dotfiles repo")
 	fi
