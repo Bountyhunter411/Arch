@@ -2,7 +2,13 @@
 
 # Functions
 
-	programs=(reflector)
+	name=$USER
+
+	mirrorUpdater=(reflector)
+
+	aur=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrdb-git spotify steam-fonts via-bin xenia-bin)
+
+	p10k=(zsh-theme-powerlevel10k-git)
 
 	#applications=(zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
 
@@ -25,9 +31,9 @@
 	sleep 3
 		pacman -Sy
 
-	for program in "${programs[@]}"; do
-		if ! command -v "$program" > /dev/null 2>&1; then
-			pacman -Sy "$program" --noconfirm
+	for mirror in "${mirrorUpdate[@]}"; do
+		if ! command -v "$mirrorUpdater" > /dev/null 2>&1; then
+			pacman -Sy "$mirrorUpdater" --noconfirm
 		fi
 	done
 
@@ -67,7 +73,50 @@
 
 }
 
-# Enable Services
+# Install Programs from AUR
+
+{
+
+	for program in "${aur[@]}"; do
+		if ! command -v "$aur" > /dev/null 2>&1; then
+			echo "Installing $aur"
+				sudo -u "$name" yay -Si "$aur" --noconfirm
+		fi
+	done
+
+}
+
+# Switch shell to zsh
+
+{
+
+	echo "Switching Shell to zsh"
+
+	if (sudo -u "$name" chsh -s /bin/zsh && echo $SHELL == /bin/zsh)
+	then (echo "Shell is now zsh")
+	else (echo "Shell switch failed!")
+
+}
+
+# Download and copy dotfiles
+
+{
+
+	if (git clone https://github.com/Bountyhunter411/dotfiles)
+	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc)
+			echo "Installing zsh theme"
+				sudo -u "$name" yay -Si "$p10k" --noconfirm
+					echo "zsh theme installed"
+						echo "Installing zsh plugins"
+							git clone https://github.com/zsh-users/zsh-syntax-highlighting  /usr/share/zsh/plugins/zsh-autosuggestions/
+								git clone https://github.com/zsh-users/zsh-autosuggestions /usr/share/zsh/plugins/zsh-autosuggestions/
+									echo "Plugins installed"
+	else (echo "Unable to clone dotfiles repo")
+	fi
+
+}
+
+# Enable Services and reboot
 
 {
 
@@ -75,3 +124,5 @@
 	systemctl enable sddm
 
 	reboot
+
+}
