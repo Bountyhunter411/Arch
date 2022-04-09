@@ -6,7 +6,7 @@
 
 	aurprograms=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrgb-git spotify steam-fonts via-bin xenia-bin)
 
-	zshthemes=(zsh-theme-powerlevel10k-git)
+	#zshthemes=(zsh-theme-powerlevel10k-git)
 
 	#applications=(zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
 
@@ -77,7 +77,7 @@
 
 	if 	(pacman -Sy zsh plasma konsole dolphin kate yay virt-manager qemu libvirt edk2-ovmf ebtables dnsmasq bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
 	then (echo "Applications Installed")
-	else (echo "Application Install Failed")
+	else (echo "Application Install Failed" && exit 1)
 	fi
 
 }
@@ -115,13 +115,16 @@
 
 {
 
-	for zshtheme in "{$zshthemes[@]}"; do
-		if ! command -v "$zshtheme" > /dev/null 2>&1; then
-			echo "Installing zsh Theme"
-				sudo -u "$name" yay -S "$zshtheme" --noconfirm
-				echo "Theme Installed"
-		fi
-	done
+	#for zshtheme in "{$zshthemes[@]}"; do
+	#	if ! command -v "$zshtheme" > /dev/null 2>&1; then
+	#		echo "Installing zsh Theme"
+	#			sudo -u "$name" yay -S "$zshtheme" --noconfirm
+	#			echo "Theme Installed"
+	#	fi
+	#done
+
+	if (sudo -u "$name" yay -S zsh-theme-powerlevel10k-git --noconfirm)
+	then (echo "zsh theme installed")
 
 }
 
@@ -130,13 +133,14 @@
 {
 
 	if (git clone https://github.com/zsh-users/zsh-syntax-highlighting)
-	then (mkdir -p /usr/share/zsh/plugins/zsh-syntax-highlighting/ && cp -r zsh-syntax-highlighting/* /usr/share/zsh/plugins/zsh-syntax-highlighting/ && echo "Syntax Highlighting Installed")
+	then (mkdir -p /usr/share/zsh/plugins/zsh-syntax-highlighting && cp -r zsh-syntax-highlighting/* /usr/share/zsh/plugins/zsh-syntax-highlighting/ && echo "Syntax Highlighting Installed")
+	fi
 
 	sleep 3
 
 	if (git clone https://github.com/zsh-users/zsh-autosuggestions)
-	then (mkdir -p /usr/share/zsh/plugins/zsh/autosuggestions && cp -r zsh-autosuggestions/* /usr/share/zsh/plugins/zsh-autosuggestions && echo "Autosuggentions Installed")
-
+	then (mkdir -p /usr/share/zsh/plugins/zsh-autosuggestions && cp -r zsh-autosuggestions/* /usr/share/zsh/plugins/zsh-autosuggestions && echo "Autosuggentions Installed")
+	fi
 }
 
 # Copy dotfiles
