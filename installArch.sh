@@ -47,7 +47,7 @@
 
 	echo "Installed Dialog and Reflector"
 	echo "Updating Mirrorlist"
-	reflector --sort rate --country "Australia, New Zealand" --save /home/daniel/git/repos/Arch/mirrorlist.conf
+	reflector --sort rate --country "Australia, New Zealand" --save /etc/pacman.d/mirrorlist
 		echo "Mirrorlist Updated"
 
 }
@@ -99,84 +99,53 @@
 
 # Switch shell to zsh
 
-{
-
-	echo "Switching Shell to zsh"
-
-	if (sudo -u "$name" chsh -s /bin/zsh && echo $SHELL == /bin/zsh)
-	then (echo "Shell is now zsh")
-	else (echo "Shell switch failed!")
-	fi
-}
+# {
+#
+# 	echo "Switching Shell to zsh"
+#
+# 	if (sudo -u "$name" chsh -s /bin/zsh && echo $SHELL == /bin/zsh)
+# 	then (echo "Shell is now zsh")
+# 	else (echo "Shell switch failed!")
+# 	fi
+# }
 
 # Download and copy dotfiles (comment out; need to fix; doesn't work)
 
 # Download and install zsh theme
 
-{
-
-	#for zshtheme in "{$zshthemes[@]}"; do
-	#	if ! command -v "$zshtheme" > /dev/null 2>&1; then
-	#		echo "Installing zsh Theme"
-	#			sudo -u "$name" yay -S "$zshtheme" --noconfirm
-	#			echo "Theme Installed"
-	#	fi
-	#done
-
-	if (sudo -u "$name" yay -S zsh-theme-powerlevel10k-git --noconfirm)
-	then (echo "zsh theme installed")
-
-}
-
-# Add zsh plugins
-
-{
-
-	if (git clone https://github.com/zsh-users/zsh-syntax-highlighting)
-	then (mkdir -p /usr/share/zsh/plugins/zsh-syntax-highlighting && cp -r zsh-syntax-highlighting/* /usr/share/zsh/plugins/zsh-syntax-highlighting/ && echo "Syntax Highlighting Installed")
-	fi
-
-	sleep 3
-
-	if (git clone https://github.com/zsh-users/zsh-autosuggestions)
-	then (mkdir -p /usr/share/zsh/plugins/zsh-autosuggestions && cp -r zsh-autosuggestions/* /usr/share/zsh/plugins/zsh-autosuggestions && echo "Autosuggentions Installed")
-	fi
-}
-
-# Copy dotfiles
-
-{
-
-	if (git clone https://github.com/Bountyhunter411/dotfiles)
-	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc && rm -rf /usr/share/zsh-theme/powerlevel10k/* && cp -r dotfiles/zsh/themes/zsh-theme-powerlevel10k/* /usr/share/zsh-theme/powerlevel10k/)
-	else ( echo "Dotfile install failed")
-	fi
-
-}
-
-
-
-
-
-#{
+# {
 #
-#	if (git clone https://github.com/Bountyhunter411/dotfiles)
-#	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc)
-#			echo "Installing zsh theme"
-#				sudo -u "$name" yay -S "$p10k" --noconfirm
-#					cp -r dotfiles/zsh/themes/zsh-theme-powerlevel10k /usr/share/
-#						echo "zsh theme installed"
-#							echo "Installing zsh plugins"
-#								git clone https://github.com/zsh-users/zsh-syntax-highlighting
-#								mv zsh-syntax-highlighting /usr/share/zsh/plugins/zsh-syntax-highlighting/
-#									git clone https://github.com/zsh-users/zsh-autosuggestions
-#									mv zsh-autosuggestions /usr/share/zsh/plugins/zsh-autosuggestions/
-#										echo "Plugins installed"
-#	else (echo "Unable to clone dotfiles repo")
-#	fi
-
-#}
-
+# 	if (sudo -u "$name" yay -S zsh-theme-powerlevel10k-git --noconfirm)
+# 	then (echo "zsh theme installed")
+# 	fi
+# }
+#
+# # Add zsh plugins
+#
+# {
+#
+# 	if (git clone https://github.com/zsh-users/zsh-syntax-highlighting)
+# 	then (mkdir -p /usr/share/zsh/plugins/zsh-syntax-highlighting && cp -r zsh-syntax-highlighting/* /usr/share/zsh/plugins/zsh-syntax-highlighting/ && echo "Syntax Highlighting Installed")
+# 	fi
+#
+# 	sleep 3
+#
+# 	if (git clone https://github.com/zsh-users/zsh-autosuggestions)
+# 	then (mkdir -p /usr/share/zsh/plugins/zsh-autosuggestions && cp -r zsh-autosuggestions/* /usr/share/zsh/plugins/zsh-autosuggestions && echo "Autosuggentions Installed")
+# 	fi
+# }
+#
+# # Copy dotfiles
+#
+# {
+#
+# 	if (git clone https://github.com/Bountyhunter411/dotfiles)
+# 	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc && rm -rf /usr/share/zsh-theme/powerlevel10k/* && cp -r dotfiles/zsh/themes/zsh-theme-powerlevel10k/* /usr/share/zsh-theme/powerlevel10k/)
+# 	else ( echo "Dotfile install failed")
+# 	fi
+#
+# }
+#
 # Enable Services and reboot
 
 {
