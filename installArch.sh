@@ -6,8 +6,6 @@
 
 	aurprograms=(brave-bin gwe mangohud-git mangohud-common-git minecraft-launcher nerd-fonts-complete openrgb-git spotify steam-fonts via-bin xenia-bin)
 
-	#zshthemes=(zsh-theme-powerlevel10k-git)
-
 	#applications=(zsh plasma konsole dolphin kate yay virt-manager bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
 
 # Get user input for username
@@ -96,7 +94,7 @@
 
 {
 
-	if 	(pacman -Sy zsh plasma konsole dolphin kate yay virt-manager qemu libvirt edk2-ovmf ebtables dnsmasq bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl)
+	if 	(pacman -Sy zsh plasma konsole dolphin kate yay virt-manager qemu libvirt edk2-ovmf ebtables dnsmasq bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl openssh)
 	then (echo "Applications Installed")
 	else (echo "Application Install Failed" && exit 1)
 	fi
@@ -119,6 +117,25 @@
 {
 
 # Need to add shell switch to zsh and enable plugins + theme
+
+{
+
+# Clone and copy dotfiles
+	git clone https://github.com/Bountyhunter411/dotfiles
+	chown -r "$name":"$name" dotfiles
+	cp dotfiles/p10k/.p10k.zsh /home/"$name"/
+	cp dotfiles/zsh/.zshrc /home/"$name"/
+
+
+# Clone and move theme + plugins
+	git clone https://github.com/romkatv/powerlevel10k
+	mv powerlevel10k /usr/share/zsh/plugins/
+
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting
+	mv zsh-syntax-highlighting /usr/share/zsh/plugins/
+
+	git clone https://github.com/zsh-users/zsh-autosuggestions
+	mv zsh-autosuggestions /usr/share/zsh/plugins/
 
 }
 
