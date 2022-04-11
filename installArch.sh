@@ -14,11 +14,32 @@
 
 	getusername() {
 		name=$(\
-				dialog --title "Please Enter Username" \
-				--inputbox "Enter Username" 8 40 \
+				dialog --title "Creating Account" \
+				--inputbox "Set Username" 8 40 \
 				3>&1 1>&2 2>&3- \
 				)
 				}
+
+
+	getpasswd() {
+		passwd=$(\
+				  dialog --title "Creating Account" \
+				  --inputbox "Set Password" 8 40 \
+				  3>&1 1>&2 2>&3- \
+				  )
+				  }
+
+{
+
+	# Create user
+
+	getusername
+	useradd -m "$name" -G wheel
+
+	getpasswd
+	echo "$name:$passwd" | chpasswd
+
+}
 
 {
 
@@ -86,8 +107,6 @@
 
 {
 
-	getusername
-
 	for aurprogram in "${aurprograms[@]}"; do
 		if ! command -v "$aurprogram" > /dev/null 2>&1; then
 			echo "Installing $aurprogram"
@@ -97,55 +116,12 @@
 
 }
 
-# Switch shell to zsh
+{
 
-# {
-#
-# 	echo "Switching Shell to zsh"
-#
-# 	if (sudo -u "$name" chsh -s /bin/zsh && echo $SHELL == /bin/zsh)
-# 	then (echo "Shell is now zsh")
-# 	else (echo "Shell switch failed!")
-# 	fi
-# }
+# Need to add shell switch to zsh and enable plugins + theme
 
-# Download and copy dotfiles (comment out; need to fix; doesn't work)
+}
 
-# Download and install zsh theme
-
-# {
-#
-# 	if (sudo -u "$name" yay -S zsh-theme-powerlevel10k-git --noconfirm)
-# 	then (echo "zsh theme installed")
-# 	fi
-# }
-#
-# # Add zsh plugins
-#
-# {
-#
-# 	if (git clone https://github.com/zsh-users/zsh-syntax-highlighting)
-# 	then (mkdir -p /usr/share/zsh/plugins/zsh-syntax-highlighting && cp -r zsh-syntax-highlighting/* /usr/share/zsh/plugins/zsh-syntax-highlighting/ && echo "Syntax Highlighting Installed")
-# 	fi
-#
-# 	sleep 3
-#
-# 	if (git clone https://github.com/zsh-users/zsh-autosuggestions)
-# 	then (mkdir -p /usr/share/zsh/plugins/zsh-autosuggestions && cp -r zsh-autosuggestions/* /usr/share/zsh/plugins/zsh-autosuggestions && echo "Autosuggentions Installed")
-# 	fi
-# }
-#
-# # Copy dotfiles
-#
-# {
-#
-# 	if (git clone https://github.com/Bountyhunter411/dotfiles)
-# 	then (cp dotfiles/zsh/.zshrc /home/$name/.zshrc && rm -rf /usr/share/zsh-theme/powerlevel10k/* && cp -r dotfiles/zsh/themes/zsh-theme-powerlevel10k/* /usr/share/zsh-theme/powerlevel10k/)
-# 	else ( echo "Dotfile install failed")
-# 	fi
-#
-# }
-#
 # Enable Services and reboot
 
 {
