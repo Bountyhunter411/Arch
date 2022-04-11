@@ -31,11 +31,17 @@
 
 	# Create user
 
-	getusername
-	useradd -m "$name" -G wheel
+	if (getusername)
+	then (getpasswd)
+	fi
 
-	getpasswd
-	echo "$name:$passwd" | chpasswd
+}
+
+{
+
+	if (useradd -m "$name" -G wheel)
+	then (echo "$name:$passwd" | chpasswd)
+	fi
 
 }
 
