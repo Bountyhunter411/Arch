@@ -19,40 +19,35 @@
 				}
 
 
-	getpasswd() {
-		passwd=$(\
-				  dialog --title "Creating Account" \
-				  --inputbox "Set Password" 8 40 \
-				  3>&1 1>&2 2>&3- \
-				  )
-				  }
+#	getpasswd() {
+#		passwd=$(\
+#				  dialog --title "Creating Account" \
+#				  --inputbox "Set Password" 8 40 \
+#				  3>&1 1>&2 2>&3- \
+#				  )
+#				  }
+#
+#{
+#
+#	# Create user
+#
+#	if (getusername)
+#	then (getpasswd)
+#	fi
+#
+#}
+
+#{
+#
+#	if (useradd -m "$name" && usermod -aG wheel daniel)
+#	then (echo "$name:$passwd" | chpasswd)
+#	fi
+#
+#}
 
 {
 
-	# Create user
 
-	if (getusername)
-	then (getpasswd)
-	fi
-
-}
-
-{
-
-	if (useradd -m "$name" && usermod -aG wheel daniel)
-	then (echo "$name:$passwd" | chpasswd)
-	fi
-
-}
-
-{
-
-# Enable Multilib and Parallel Dowloads
-
-	#From Evan Graham on Stack Overflow
-	if (sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf)
-	then (sed -i '/ParallelDownloads/s/^#//g' /etc/pacman.conf)
-	fi
 
 }
 
@@ -63,6 +58,13 @@
 	ping -c3 archlinux.org >/dev/null && echo "Network Connected"
 	sleep 3
 		pacman -Sy
+
+# Enable Multilib and Parallel Dowloads
+
+	#From Evan Graham on Stack Overflow
+	if (sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf)
+	then (sed -i '/ParallelDownloads/s/^#//g' /etc/pacman.conf)
+	fi
 
 	for dependentprogram in "${dependentprograms[@]}"; do
 		if ! command -v "$dependentprogram" > /dev/null 2>&1; then
@@ -100,7 +102,7 @@
 
 {
 
-	if 	(pacman -Sy zsh gnome konsole dolphin kate yay virt-manager qemu libvirt edk2-ovmf ebtables dnsmasq bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl openssh)
+	if 	(pacman -Sy zsh plasma konsole dolphin kate yay virt-manager qemu libvirt edk2-ovmf ebtables dnsmasq bashtop bless burpsuite deluge deluge-gtk discord enum4linux filelight github-cli gnome-keyring gnu-netcat guvcview htop hydra john kdenlive linux-headers lutris metasploit mpv neofetch nmap ntfs-3g obs-studio obsidian openvpn s-tui signal-desktop speedtest-cli sqlmap steam tree unrar wget youtube-dl openssh)
 	then (echo "Applications Installed")
 	else (echo "Application Install Failed" && exit 1)
 	fi
@@ -127,21 +129,21 @@
 {
 
 # Clone and copy dotfiles
-	git clone https://github.com/Bountyhunter411/dotfiles
-	chown -r "$name":"$name" dotfiles
-	cp dotfiles/p10k/.p10k.zsh /home/"$name"/
-	cp dotfiles/zsh/.zshrc /home/"$name"/
+#	git clone https://github.com/Bountyhunter411/dotfiles
+#	chown -r "$name":"$name" dotfiles
+#	cp dotfiles/p10k/.p10k.zsh /home/"$name"/
+#	cp dotfiles/zsh/.zshrc /home/"$name"/
 
 
 # Clone and move theme + plugins
-	git clone https://github.com/romkatv/powerlevel10k
-	mv powerlevel10k /usr/share/zsh/plugins/
+#	git clone https://github.com/romkatv/powerlevel10k
+#	mv powerlevel10k /usr/share/zsh/plugins/
 
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting
-	mv zsh-syntax-highlighting /usr/share/zsh/plugins/
+#	git clone https://github.com/zsh-users/zsh-syntax-highlighting
+#	mv zsh-syntax-highlighting /usr/share/zsh/plugins/
 
-	git clone https://github.com/zsh-users/zsh-autosuggestions
-	mv zsh-autosuggestions /usr/share/zsh/plugins/
+#	git clone https://github.com/zsh-users/zsh-autosuggestions
+#	mv zsh-autosuggestions /usr/share/zsh/plugins/
 
 }
 
